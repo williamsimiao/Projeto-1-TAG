@@ -3,15 +3,25 @@
 #include "readgml.h"
 #include "network.h"
 
-int main() {
-    printf("Hello2\n");
-    FILE *my_file = fopen("r", "karate/karate.gml");
-    printf("Hello3\n");
-    if(my_file != NULL){
+void read_file(FILE *my_file) {
+    char line[1000];
+    int i;
+    my_file = fopen("karate.gml", "r");
+    if(my_file == NULL){
         printf("Nao achei o arquivo\n");
+        exit(1);
     }
-    NETWORK *my_net;
-    read_network(my_net, my_file);
-    printf("Hello\n");
+
+    for(i=0; i < 4; i++) {
+        fscanf(my_file, "%[^\n]", line);
+    }
+    printf("%s\n", line);
+
+
+}
+
+int main() {
+    FILE *my_file;
+    read_file(my_file);
     return 0; 
 }
